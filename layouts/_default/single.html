@@ -1,0 +1,80 @@
+{{ define "main" }}
+<article class="single-page">
+  <header class="page-header">
+    <div class="container">
+      {{ if .Params.featured_image }}
+      <div class="page-hero-image">
+        <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" class="hero-image">
+      </div>
+      {{ end }}
+      
+      <div class="page-header-content">
+        <h1 class="page-title">{{ .Title }}</h1>
+        
+        {{ if .Date }}
+        <div class="page-meta">
+          <time class="page-date">{{ .Date.Format "January 2, 2006" }}</time>
+          {{ if .Params.tags }}
+          <div class="page-tags">
+            {{ range .Params.tags }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+        
+        {{ if .Params.summary }}
+        <p class="page-summary">{{ .Params.summary }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </header>
+  
+  <div class="page-content">
+    <div class="container">
+      <div class="content-wrapper">
+        <div class="content">
+          {{ .Content }}
+        </div>
+        
+        {{ if eq .Section "blog" }}
+        <aside class="content-sidebar">
+          <div class="sidebar-section">
+            <h3>Share this post</h3>
+            <div class="share-buttons">
+              <a href="https://twitter.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" class="share-btn twitter">Twitter</a>
+              <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" class="share-btn linkedin">LinkedIn</a>
+            </div>
+          </div>
+          
+          {{ if .Params.tags }}
+          <div class="sidebar-section">
+            <h3>Tags</h3>
+            <div class="tag-list">
+              {{ range .Params.tags }}
+              <a href="/tags/{{ . | urlize }}" class="tag-link">{{ . }}</a>
+              {{ end }}
+            </div>
+          </div>
+          {{ end }}
+        </aside>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+  
+  {{ if eq .Section "blog" }}
+  <section class="post-cta">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Ready to optimize your revenue operations?</h2>
+        <p>Let's discuss how we can help you implement the strategies discussed in this post.</p>
+        <a href="/contact" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+  {{ end }}
+</article>
+{{ end }}
+

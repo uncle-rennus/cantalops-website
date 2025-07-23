@@ -1,0 +1,63 @@
+<section class="blog-preview-module {{ if .module.background_color }}bg-{{ .module.background_color }}{{ else }}blog-section{{ end }}">
+  <div class="container">
+    {{ if .module.title }}
+    <h2 class="blog-title">{{ .module.title | markdownify }}</h2>
+    {{ end }}
+    
+    {{ if .module.subtitle }}
+    <p class="blog-subtitle">{{ .module.subtitle | markdownify }}</p>
+    {{ end }}
+    
+    <div class="blog-grid">
+      {{ $posts := .page.Site.RegularPages }}
+      {{ if .module.section }}
+        {{ $posts = where $posts "Section" .module.section }}
+      {{ else }}
+        {{ $posts = where $posts "Section" "blog" }}
+      {{ end }}
+      
+      {{ $limit := .module.limit | default 3 }}
+      {{ range first $limit $posts }}
+      <article class="blog-card">
+        {{ if .Params.featured_image }}
+        <div class="blog-image">
+          <a href="{{ .Permalink }}">
+            <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" loading="lazy">
+          </a>
+        </div>
+        {{ end }}
+        
+        <div class="blog-content">
+          <div class="blog-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+            {{ if .Params.category }}
+            <span class="blog-category">{{ .Params.category }}</span>
+            {{ end }}
+          </div>
+          
+          <h3 class="blog-post-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h3>
+          
+          {{ if .Params.summary }}
+          <p class="blog-excerpt">{{ .Params.summary }}</p>
+          {{ else if .Summary }}
+          <p class="blog-excerpt">{{ .Summary }}</p>
+          {{ end }}
+          
+          <a href="{{ .Permalink }}" class="blog-read-more">Read More</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    
+    {{ if .module.button }}
+    <div class="blog-cta">
+      <a href="{{ .module.button.url }}" class="btn {{ if .module.button.primary }}btn-primary{{ else }}btn-secondary{{ end }}">
+        {{ .module.button.text }}
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</section>
+

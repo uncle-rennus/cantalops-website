@@ -1,0 +1,144 @@
+baseURL = "https://cantalops.com"
+languageCode = "en-us"
+title = "Cantalops Consulting"
+defaultContentLanguage = "en"
+
+[languages]
+  [languages.en]
+    title = "Cantalops Consulting"
+    weight = 1
+    languageName = "English"
+    
+  [languages.pt]
+    title = "Cantalops Consultoria"
+    weight = 2
+    languageName = "Português"
+
+# SEO and Performance Parameters
+[params]
+  description = "We turn chaos into revenue. From demand gen to deal close, we build AI-powered sales engines that actually scale."
+  tagline = "Revenue Operations Consulting"
+  keywords = ["revenue operations", "sales automation", "RevOps", "sales consulting", "B2B SaaS", "sales optimization", "CRM automation", "lead generation", "sales enablement"]
+  author = "Cantalops Consulting"
+  email = "hello@cantalops.com"
+  phone = "+1 (555) 123-4567"
+  country = "US"
+  logo = "/images/cantalops_logo.svg"
+  
+  # Social media links
+  [[params.social]]
+    name = "LinkedIn"
+    url = "https://linkedin.com/company/cantalops"
+  
+  [[params.social]]
+    name = "Twitter"
+    url = "https://twitter.com/cantalops"
+
+# Hugo Performance Settings
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
+    lineNos = true
+
+# Image processing
+[imaging]
+  quality = 85
+  resampleFilter = "lanczos"
+
+# Minification settings
+[minify]
+  disableCSS = false
+  disableHTML = false
+  disableJS = false
+  disableJSON = false
+  disableSVG = false
+  disableXML = false
+  minifyOutput = true
+  [minify.tdewolff]
+    [minify.tdewolff.css]
+      keepCSS2 = true
+      precision = 0
+    [minify.tdewolff.html]
+      keepComments = false
+      keepConditionalComments = true
+      keepDefaultAttrVals = true
+      keepDocumentTags = true
+      keepEndTags = true
+      keepQuotes = false
+      keepWhitespace = false
+    [minify.tdewolff.js]
+      keepVarNames = false
+      precision = 0
+    [minify.tdewolff.json]
+      precision = 0
+    [minify.tdewolff.svg]
+      precision = 0
+    [minify.tdewolff.xml]
+      keepWhitespace = false
+
+# Sitemap configuration
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+# Privacy settings
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = false
+    respectDoNotTrack = true
+    anonymizeIP = true
+  [privacy.instagram]
+    disable = true
+  [privacy.twitter]
+    disable = false
+    enableDNT = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = false
+    privacyEnhanced = true
+
+# Security settings
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = ['^dart-sass-embedded$', '^go$', '^npx$', '^postcss$']
+    osEnv = ['(?i)^(PATH|PATHEXT|APPDATA|TMP|TEMP|TERM)$']
+  [security.funcs]
+    getenv = ['^HUGO_']
+  [security.http]
+    methods = ['(?i)GET|POST']
+    urls = ['.*']
+
+[menu]
+  [[menu.main]]
+    name = "Services"
+    url = "/services/"
+    weight = 10
+    
+  [[menu.main]]
+    name = "Case Studies"
+    url = "/case-studies/"
+    weight = 20
+    
+  [[menu.main]]
+    name = "Insights"
+    url = "/blog/"
+    weight = 30
+    
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 40
+    
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
+    weight = 50
+

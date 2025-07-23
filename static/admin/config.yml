@@ -1,0 +1,75 @@
+backend:
+  name: test-repo
+
+local_backend: true
+
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Homepage (English)"
+        name: "homepage"
+        file: "content/_index.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Hero Title", name: "hero_title", widget: "string"}
+          - {label: "Hero Subtitle", name: "hero_subtitle", widget: "text"}
+          - {label: "Hero CTA Text", name: "hero_cta_text", widget: "string"}
+          - {label: "Hero CTA Link", name: "hero_cta_link", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Homepage (Portuguese)"
+        name: "homepage_pt"
+        file: "content/_index.pt.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Hero Title", name: "hero_title", widget: "string"}
+          - {label: "Hero Subtitle", name: "hero_subtitle", widget: "text"}
+          - {label: "Hero CTA Text", name: "hero_cta_text", widget: "string"}
+          - {label: "Hero CTA Link", name: "hero_cta_link", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "featured_image", widget: "image", required: false}
+      - {label: "Summary", name: "summary", widget: "text", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+      - {label: "Draft", name: "draft", widget: "boolean", default: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "services"
+    label: "Services"
+    folder: "content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Icon", name: "icon", widget: "string", required: false}
+      - {label: "Summary", name: "summary", widget: "text"}
+      - {label: "Featured Image", name: "featured_image", widget: "image", required: false}
+      - {label: "Weight", name: "weight", widget: "number", default: 1}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "case_studies"
+    label: "Case Studies"
+    folder: "content/case-studies"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Client Name", name: "client_name", widget: "string"}
+      - {label: "Challenge", name: "challenge", widget: "text"}
+      - {label: "Result", name: "result", widget: "text"}
+      - {label: "Quote", name: "quote", widget: "text", required: false}
+      - {label: "Featured Image", name: "featured_image", widget: "image", required: false}
+      - {label: "Weight", name: "weight", widget: "number", default: 1}
+      - {label: "Body", name: "body", widget: "markdown"}
+

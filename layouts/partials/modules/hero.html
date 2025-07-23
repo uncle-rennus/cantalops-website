@@ -1,0 +1,36 @@
+<section class="hero-module {{ if .module.background_color }}bg-{{ .module.background_color }}{{ else }}hero-section{{ end }}">
+  <div class="container">
+    <div class="hero-content">
+      {{ if .module.title }}
+      <h1 class="hero-title">{{ .module.title | markdownify }}</h1>
+      {{ end }}
+      
+      {{ if .module.subtitle }}
+      <p class="hero-subtitle">{{ .module.subtitle | markdownify }}</p>
+      {{ end }}
+      
+      {{ if .module.description }}
+      <div class="hero-description">
+        {{ .module.description | markdownify }}
+      </div>
+      {{ end }}
+      
+      {{ if .module.buttons }}
+      <div class="hero-buttons">
+        {{ range .module.buttons }}
+        <a href="{{ .url }}" class="btn {{ if .primary }}btn-primary{{ else }}btn-secondary{{ end }}">
+          {{ .text }}
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    
+    {{ if .module.image }}
+    <div class="hero-image">
+      <img src="{{ .module.image }}" alt="{{ .module.image_alt | default .module.title }}" loading="lazy">
+    </div>
+    {{ end }}
+  </div>
+</section>
+

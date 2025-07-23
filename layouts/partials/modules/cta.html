@@ -1,0 +1,30 @@
+<section class="cta-module {{ if .module.background_color }}bg-{{ .module.background_color }}{{ else }}contact-cta-section{{ end }}">
+  <div class="container">
+    <div class="cta-content">
+      {{ if .module.title }}
+      <h2 class="cta-title">{{ .module.title | markdownify }}</h2>
+      {{ end }}
+      
+      {{ if .module.subtitle }}
+      <p class="cta-subtitle">{{ .module.subtitle | markdownify }}</p>
+      {{ end }}
+      
+      {{ if .module.description }}
+      <div class="cta-description">
+        {{ .module.description | markdownify }}
+      </div>
+      {{ end }}
+      
+      {{ if .module.buttons }}
+      <div class="cta-buttons">
+        {{ range .module.buttons }}
+        <a href="{{ .url }}" class="btn {{ if .primary }}btn-primary{{ else }}btn-secondary{{ end }}">
+          {{ .text }}
+        </a>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+

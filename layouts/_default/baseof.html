@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- SEO Meta Tags -->
+  <title>{{ if .IsHome }}{{ .Site.Title }} - {{ .Site.Params.tagline }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  
+  {{ if .Description }}
+  <meta name="description" content="{{ .Description }}">
+  {{ else if .Summary }}
+  <meta name="description" content="{{ .Summary | truncate 160 }}">
+  {{ else if .Site.Params.description }}
+  <meta name="description" content="{{ .Site.Params.description }}">
+  {{ end }}
+  
+  <meta name="keywords" content="{{ if .Params.keywords }}{{ delimit .Params.keywords ", " }}{{ else }}{{ .Site.Params.keywords }}{{ end }}">
+  <meta name="author" content="{{ .Site.Params.author | default .Site.Title }}">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  
+  <!-- Language alternatives -->
+  {{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+  {{ end }}
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }} - {{ .Site.Params.tagline }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  {{ if .Description }}
+  <meta property="og:description" content="{{ .Description }}">
+  {{ else if .Summary }}
+  <meta property="og:description" content="{{ .Summary | truncate 160 }}">
+  {{ else if .Site.Params.description }}
+  <meta property="og:description" content="{{ .Site.Params.description }}">
+  {{ end }}
+  {{ if .Params.featured_image }}
+  <meta property="og:image" content="{{ .Params.featured_image | absURL }}">
+  {{ else }}
+  <meta property="og:image" content="{{ "/images/cantalops-og-image.png" | absURL }}">
+  {{ end }}
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="{{ .Site.LanguageCode }}">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="{{ .Permalink }}">
+  <meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }} - {{ .Site.Params.tagline }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+  {{ if .Description }}
+  <meta name="twitter:description" content="{{ .Description }}">
+  {{ else if .Summary }}
+  <meta name="twitter:description" content="{{ .Summary | truncate 160 }}">
+  {{ else if .Site.Params.description }}
+  <meta name="twitter:description" content="{{ .Site.Params.description }}">
+  {{ end }}
+  {{ if .Params.featured_image }}
+  <meta name="twitter:image" content="{{ .Params.featured_image | absURL }}">
+  {{ else }}
+  <meta name="twitter:image" content="{{ "/images/cantalops-og-image.png" | absURL }}">
+  {{ end }}
+  
+  <!-- Article specific meta tags -->
+  {{ if .IsPage }}
+  <meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+  <meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+  {{ if .Params.author }}
+  <meta property="article:author" content="{{ .Params.author }}">
+  {{ end }}
+  {{ range .Params.tags }}
+  <meta property="article:tag" content="{{ . }}">
+  {{ end }}
+  {{ end }}
+  
+  <!-- Favicon and Icons -->
+  <link rel="icon" type="image/svg+xml" href="/images/cantalops_logo.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+  
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://js.hsforms.net">
+  
+  <!-- Fonts with display=swap for performance -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  {{ $css := resources.Get "css/main.css" }}
+  {{ if $css }}
+    {{ if hugo.IsProduction }}
+      {{ $css = $css | minify | fingerprint }}
+      <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+    {{ else }}
+      <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+    {{ end }}
+  {{ else }}
+    <link rel="stylesheet" href="/css/main.css">
+  {{ end }}
+  
+  <!-- Structured Data -->
+  {{ if .IsHome }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}",
+    "logo": "{{ "/images/cantalops_logo.svg" | absURL }}",
+    "description": "{{ .Site.Params.description }}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "{{ .Site.Params.country | default "US" }}"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "{{ .Site.Params.phone }}",
+      "contactType": "customer service",
+      "email": "{{ .Site.Params.email }}"
+    },
+    "sameAs": [
+      {{ range $i, $social := .Site.Params.social }}
+      {{ if $i }},{{ end }}"{{ $social.url }}"
+      {{ end }}
+    ]
+  }
+  </script>
+  {{ end }}
+  
+  {{ if and .IsPage (eq .Type "blog") }}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ .Title }}",
+    "description": "{{ .Summary | truncate 160 }}",
+    "image": "{{ if .Params.featured_image }}{{ .Params.featured_image | absURL }}{{ else }}{{ "/images/cantalops-og-image.png" | absURL }}{{ end }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ .Params.author | default .Site.Params.author }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ .Site.Title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ "/images/cantalops_logo.svg" | absURL }}"
+      }
+    },
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ .Permalink }}"
+    }
+  }
+  </script>
+  {{ end }}
+</head>
+
+<body class="{{ if .Site.Params.dark_mode }}dark{{ end }}">
+  {{ partial "header.html" . }}
+  
+  <main class="main-content">
+    {{ block "main" . }}{{ end }}
+  </main>
+  
+  {{ partial "footer.html" . }}
+  
+  <!-- Scripts -->
+  {{ $js := resources.Get "js/main.js" }}
+  {{ if $js }}
+    {{ if hugo.IsProduction }}
+      {{ $js = $js | minify | fingerprint }}
+      <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+    {{ else }}
+      <script src="{{ $js.RelPermalink }}" defer></script>
+    {{ end }}
+  {{ else }}
+    <script src="/js/main.js" defer></script>
+  {{ end }}
+</body>
+</html>
+

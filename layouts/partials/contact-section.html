@@ -1,0 +1,174 @@
+<section id="contact" class="contact-section">
+  <div class="container">
+    <div class="contact-content">
+      <div class="contact-header">
+        <h2 class="contact-title">{{ i18n "contact_title" }}</h2>
+        <p class="contact-subtitle">{{ i18n "contact_subtitle" }}</p>
+      </div>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div class="contact-details">
+              <h4 class="contact-label">{{ i18n "contact_email_label" | default "Email" }}</h4>
+              <p class="contact-value">hello@cantalops.com</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div class="contact-details">
+              <h4 class="contact-label">{{ i18n "contact_phone_label" | default "Phone" }}</h4>
+              <p class="contact-value">+1 (555) 123-4567</p>
+            </div>
+          </div>
+          
+          <div class="contact-item">
+            <div class="contact-icon">🌍</div>
+            <div class="contact-details">
+              <h4 class="contact-label">{{ i18n "contact_location_label" | default "Location" }}</h4>
+              <p class="contact-value">{{ i18n "contact_location_value" | default "Remote & On-site" }}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form-container">
+          <div class="contact-form-header">
+            <h3>{{ i18n "contact_form_title" | default "Get Started Today" }}</h3>
+            <p>{{ i18n "contact_form_subtitle" | default "Tell us about your revenue operations challenges and we'll get back to you within 24 hours." }}</p>
+          </div>
+          
+          <!-- HubSpot Form Embed -->
+          <div id="hubspot-form-container" class="hubspot-form">
+            <!-- Form will be loaded here via JavaScript -->
+            <div class="form-loading">
+              <p>{{ i18n "form_loading" | default "Loading contact form..." }}</p>
+            </div>
+          </div>
+          
+          <!-- Fallback Contact Form (if HubSpot fails to load) -->
+          <form id="fallback-form" class="contact-form-fallback" style="display: none;" action="/contact" method="POST">
+            <div class="form-group">
+              <label for="name">{{ i18n "form_name" | default "Name" }} *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">{{ i18n "form_email" | default "Email" }} *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="company">{{ i18n "form_company" | default "Company" }}</label>
+              <input type="text" id="company" name="company">
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">{{ i18n "form_phone" | default "Phone" }}</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+            
+            <div class="form-group">
+              <label for="message">{{ i18n "form_message" | default "Message" }} *</label>
+              <textarea id="message" name="message" rows="5" required placeholder="{{ i18n "form_message_placeholder" | default "Tell us about your revenue operations challenges..." }}"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              {{ i18n "form_submit" | default "Send Message" }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// HubSpot Form Integration
+(function() {
+  // Configuration - Replace with your actual HubSpot details
+  const HUBSPOT_CONFIG = {
+    portalId: "YOUR_PORTAL_ID", // Replace with your HubSpot Portal ID
+    formId: "YOUR_FORM_ID",     // Replace with your HubSpot Form ID
+    region: "na1"               // Replace with your HubSpot region if different
+  };
+  
+  // Load HubSpot Forms API
+  function loadHubSpotForm() {
+    if (typeof hbspt !== 'undefined') {
+      createForm();
+      return;
+    }
+    
+    const script = document.createElement('script');
+    script.src = '//js.hsforms.net/forms/embed/v2.js';
+    script.onload = createForm;
+    script.onerror = showFallbackForm;
+    document.head.appendChild(script);
+  }
+  
+  // Create HubSpot form
+  function createForm() {
+    try {
+      hbspt.forms.create({
+        region: HUBSPOT_CONFIG.region,
+        portalId: HUBSPOT_CONFIG.portalId,
+        formId: HUBSPOT_CONFIG.formId,
+        target: '#hubspot-form-container',
+        onFormReady: function() {
+          document.querySelector('.form-loading').style.display = 'none';
+        },
+        onFormSubmit: function() {
+          // Track form submission if needed
+          console.log('Form submitted');
+        }
+      });
+    } catch (error) {
+      console.error('Error creating HubSpot form:', error);
+      showFallbackForm();
+    }
+  }
+  
+  // Show fallback form if HubSpot fails
+  function showFallbackForm() {
+    document.querySelector('.form-loading').style.display = 'none';
+    document.getElementById('fallback-form').style.display = 'block';
+  }
+  
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadHubSpotForm);
+  } else {
+    loadHubSpotForm();
+  }
+})();
+
+// Smooth scroll to contact section
+function scrollToContact() {
+  const contactSection = document.getElementById('contact');
+  if (contactSection) {
+    contactSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+}
+
+// Add event listeners to CTA buttons
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all buttons/links that should scroll to contact
+  const ctaButtons = document.querySelectorAll('a[href="#contact"], a[href*="contact"], .cta-contact, .btn-contact');
+  
+  ctaButtons.forEach(button => {
+    // Only add scroll behavior for anchor links to contact
+    if (button.getAttribute('href') === '#contact' || button.classList.contains('scroll-to-contact')) {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        scrollToContact();
+      });
+    }
+  });
+});
+</script>
+

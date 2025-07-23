@@ -1,0 +1,46 @@
+<section class="text-module {{ if .module.background_color }}bg-{{ .module.background_color }}{{ end }}">
+  <div class="container">
+    <div class="text-content {{ if .module.layout }}layout-{{ .module.layout }}{{ else }}layout-center{{ end }}">
+      {{ if .module.title }}
+      <h2 class="text-title">{{ .module.title | markdownify }}</h2>
+      {{ end }}
+      
+      {{ if .module.subtitle }}
+      <h3 class="text-subtitle">{{ .module.subtitle | markdownify }}</h3>
+      {{ end }}
+      
+      {{ if .module.content }}
+      <div class="text-body">
+        {{ .module.content | markdownify }}
+      </div>
+      {{ end }}
+      
+      {{ if .module.columns }}
+      <div class="text-columns">
+        {{ range .module.columns }}
+        <div class="text-column">
+          {{ if .title }}
+          <h4 class="column-title">{{ .title | markdownify }}</h4>
+          {{ end }}
+          
+          {{ if .content }}
+          <div class="column-content">
+            {{ .content | markdownify }}
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      {{ if .module.button }}
+      <div class="text-button">
+        <a href="{{ .module.button.url }}" class="btn {{ if .module.button.primary }}btn-primary{{ else }}btn-secondary{{ end }}">
+          {{ .module.button.text }}
+        </a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+

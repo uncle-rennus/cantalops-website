@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="modular-page">
+  {{ range .Params.modules }}
+    {{ if eq .type "hero" }}
+      {{ partial "modules/hero.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "text" }}
+      {{ partial "modules/text.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "services" }}
+      {{ partial "modules/services.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "cta" }}
+      {{ partial "modules/cta.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "testimonials" }}
+      {{ partial "modules/testimonials.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "features" }}
+      {{ partial "modules/features.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "team" }}
+      {{ partial "modules/team.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "contact" }}
+      {{ partial "modules/contact.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "blog_preview" }}
+      {{ partial "modules/blog-preview.html" (dict "module" . "page" $.Page) }}
+    {{ else if eq .type "case_studies" }}
+      {{ partial "modules/case-studies.html" (dict "module" . "page" $.Page) }}
+    {{ end }}
+  {{ end }}
+</div>
+{{ end }}
+

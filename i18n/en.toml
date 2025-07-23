@@ -1,0 +1,115 @@
+[nav_services]
+other = "Services"
+
+[nav_case_studies]
+other = "Case Studies"
+
+[nav_insights]
+other = "Insights"
+
+[nav_about]
+other = "About"
+
+[nav_contact]
+other = "Contact"
+
+[hero_cta]
+other = "Book a Consultation"
+
+[hero_secondary_cta]
+other = "View Case Studies"
+
+[services_title]
+other = "Our Services"
+
+[services_subtitle]
+other = "End-to-end revenue operations optimization"
+
+[case_studies_title]
+other = "Success Stories"
+
+[case_studies_subtitle]
+other = "Real results from real clients"
+
+[blog_title]
+other = "Latest Insights"
+
+[blog_subtitle]
+other = "Stay ahead of the curve with our latest insights"
+
+[contact_title]
+other = "Ready to Scale Your Revenue Operations?"
+
+[contact_subtitle]
+other = "Let's discuss how we can help you build a sales engine that actually works."
+
+[read_more]
+other = "Read More"
+
+[learn_more]
+other = "Learn More"
+
+[view_all]
+other = "View All"
+
+[get_started]
+other = "Get Started"
+
+[schedule_call]
+other = "Schedule a Call"
+
+[challenge]
+other = "Challenge"
+
+[result]
+other = "Result"
+
+[footer_description]
+other = "We turn chaos into revenue. From demand gen to deal close, we build AI-powered sales engines that actually scale."
+
+[footer_copyright]
+other = "© 2024 Cantalops. All rights reserved."
+
+
+[contact_email_label]
+other = "Email"
+
+[contact_phone_label]
+other = "Phone"
+
+[contact_location_label]
+other = "Location"
+
+[contact_location_value]
+other = "Remote & On-site"
+
+[contact_form_title]
+other = "Get Started Today"
+
+[contact_form_subtitle]
+other = "Tell us about your revenue operations challenges and we'll get back to you within 24 hours."
+
+[form_loading]
+other = "Loading contact form..."
+
+[form_name]
+other = "Name"
+
+[form_email]
+other = "Email"
+
+[form_company]
+other = "Company"
+
+[form_phone]
+other = "Phone"
+
+[form_message]
+other = "Message"
+
+[form_message_placeholder]
+other = "Tell us about your revenue operations challenges..."
+
+[form_submit]
+other = "Send Message"
+

@@ -1,0 +1,138 @@
+{{ define "main" }}
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">{{ .Params.hero_title | default "We turn chaos into revenue" }}</h1>
+      <p class="hero-subtitle">{{ .Params.hero_subtitle | default "From demand gen to deal close, we build AI-powered sales engines that actually scale." }}</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary scroll-to-contact">{{ .Params.hero_cta_text | default (i18n "hero_cta") }}</a>
+        <a href="{{ "case-studies" | relLangURL }}" class="btn btn-secondary">{{ i18n "hero_secondary_cta" }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-section">
+  <div class="container">
+    <h2>{{ i18n "services_title" }}</h2>
+    <div class="services-grid">
+      {{ range (where .Site.Pages "Section" "services") }}
+      <div class="service-card">
+        {{ if .Params.icon }}
+        <div class="service-icon">{{ .Params.icon | safeHTML }}</div>
+        {{ end }}
+        <h3>{{ .Title }}</h3>
+        <p>{{ .Params.summary }}</p>
+        <a href="{{ .Permalink }}" class="service-link">{{ i18n "learn_more" }}</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- About / Why Us Section -->
+<section class="about-section">
+  <div class="container">
+    <div class="about-content">
+      <h2>{{ i18n "about_title" | default "Why Choose Cantalops" }}</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <h3>{{ i18n "about_approach_title" | default "Our Approach" }}</h3>
+          <p>{{ i18n "about_approach_text" | default "We don't just advise—we build and ship. Our pragmatic approach combines strategy with hands-on execution to deliver results that scale." }}</p>
+          
+          <h3>{{ i18n "about_values_title" | default "Our Values" }}</h3>
+          <ul>
+            <li><strong>{{ i18n "value_efficiency" | default "Efficiency" }}:</strong> {{ i18n "value_efficiency_desc" | default "No fluff, no bloated decks. Just automation, playbooks, and execution." }}</li>
+            <li><strong>{{ i18n "value_clarity" | default "Clarity" }}:</strong> {{ i18n "value_clarity_desc" | default "We simplify complex GTM systems so teams can act faster and smarter." }}</li>
+            <li><strong>{{ i18n "value_growth" | default "Growth" }}:</strong> {{ i18n "value_growth_desc" | default "We only win if your pipeline, conversion, and retention improve." }}</li>
+            <li><strong>{{ i18n "value_enablement" | default "Enablement" }}:</strong> {{ i18n "value_enablement_desc" | default "We teach as we implement, so your team scales with autonomy." }}</li>
+          </ul>
+        </div>
+        <div class="about-credentials">
+          <h3>{{ i18n "about_trusted_title" | default "Trusted by" }}</h3>
+          <div class="client-logos">
+            <!-- Client logos would go here -->
+            <p>{{ i18n "about_trusted_text" | default "Leading B2B SaaS companies trust us to optimize their revenue operations." }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Preview Section -->
+<section class="blog-preview-section">
+  <div class="container">
+    <h2>{{ i18n "blog_title" }}</h2>
+    <div class="blog-grid">
+      {{ range first 3 (where .Site.Pages "Section" "blog") }}
+      <article class="blog-card">
+        {{ if .Params.featured_image }}
+        <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" class="blog-image">
+        {{ end }}
+        <div class="blog-content">
+          <time class="blog-date">{{ .Date.Format "January 2, 2006" }}</time>
+          <h3><a href="{{ .Permalink }}">{{ .Title }}</a></h3>
+          <p>{{ .Params.summary | default (.Summary | truncate 120) }}</p>
+          <a href="{{ .Permalink }}" class="read-more">{{ i18n "read_more" }}</a>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+    <div class="blog-cta">
+      <a href="{{ "blog" | relLangURL }}" class="btn btn-secondary">{{ i18n "view_all" }} {{ i18n "nav_insights" }}</a>
+    </div>
+  </div>
+</section>
+
+<!-- Case Studies Section -->
+<section class="case-studies-section">
+  <div class="container">
+    <h2>{{ i18n "case_studies_title" }}</h2>
+    <div class="case-studies-grid">
+      {{ range first 3 (where .Site.Pages "Section" "case-studies") }}
+      <div class="case-study-card">
+        <h3>{{ .Params.client_name | default .Title }}</h3>
+        <div class="case-study-content">
+          <div class="challenge">
+            <h4>{{ i18n "challenge" }}</h4>
+            <p>{{ .Params.challenge }}</p>
+          </div>
+          <div class="result">
+            <h4>{{ i18n "result" }}</h4>
+            <p>{{ .Params.result }}</p>
+          </div>
+          {{ if .Params.quote }}
+          <blockquote class="case-study-quote">
+            "{{ .Params.quote }}"
+          </blockquote>
+          {{ end }}
+        </div>
+        <a href="{{ .Permalink }}" class="case-study-link">{{ i18n "read_full_case_study" | default "Read Full Case Study" }}</a>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- Contact CTA Section -->
+<section class="contact-cta-section">
+  <div class="container">
+    <div class="contact-cta-content">
+      <h2>{{ i18n "contact_title" }}</h2>
+      <p>{{ i18n "contact_subtitle" }}</p>
+      <div class="cta-buttons">
+        <a href="#contact" class="btn btn-primary scroll-to-contact">{{ i18n "get_started" }}</a>
+        <a href="#contact" class="btn btn-secondary scroll-to-contact">{{ i18n "schedule_call" | default "Schedule a Call" }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+{{ partial "contact-section.html" . }}
+
+{{ end }}
+

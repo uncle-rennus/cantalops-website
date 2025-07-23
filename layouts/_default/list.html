@@ -1,0 +1,160 @@
+{{ define "main" }}
+<div class="list-page">
+  <header class="page-header">
+    <div class="container">
+      <h1 class="page-title">{{ .Title }}</h1>
+      {{ if .Description }}
+      <p class="page-description">{{ .Description }}</p>
+      {{ end }}
+    </div>
+  </header>
+  
+  <div class="page-content">
+    <div class="container">
+      {{ if eq .Section "blog" }}
+      <!-- Blog List -->
+      <div class="blog-list">
+        {{ range .Paginator.Pages }}
+        <article class="blog-list-item">
+          {{ if .Params.featured_image }}
+          <div class="blog-item-image">
+            <a href="{{ .Permalink }}">
+              <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" class="blog-image">
+            </a>
+          </div>
+          {{ end }}
+          
+          <div class="blog-item-content">
+            <div class="blog-item-meta">
+              <time class="blog-date">{{ .Date.Format "January 2, 2006" }}</time>
+              {{ if .Params.tags }}
+              <div class="blog-tags">
+                {{ range first 3 .Params.tags }}
+                <span class="tag">{{ . }}</span>
+                {{ end }}
+              </div>
+              {{ end }}
+            </div>
+            
+            <h2 class="blog-item-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+            
+            <p class="blog-item-summary">
+              {{ .Params.summary | default (.Summary | truncate 200) }}
+            </p>
+            
+            <a href="{{ .Permalink }}" class="read-more">Read More</a>
+          </div>
+        </article>
+        {{ end }}
+      </div>
+      
+      {{ else if eq .Section "services" }}
+      <!-- Services List -->
+      <div class="services-list">
+        {{ range .Pages }}
+        <div class="service-item">
+          {{ if .Params.featured_image }}
+          <div class="service-item-image">
+            <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" class="service-image">
+          </div>
+          {{ end }}
+          
+          <div class="service-item-content">
+            {{ if .Params.icon }}
+            <div class="service-icon">{{ .Params.icon | safeHTML }}</div>
+            {{ end }}
+            
+            <h2 class="service-item-title">
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </h2>
+            
+            <p class="service-item-summary">{{ .Params.summary }}</p>
+            
+            <a href="{{ .Permalink }}" class="service-link">Learn More</a>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      
+      {{ else if eq .Section "case-studies" }}
+      <!-- Case Studies List -->
+      <div class="case-studies-list">
+        {{ range .Pages }}
+        <div class="case-study-item">
+          {{ if .Params.featured_image }}
+          <div class="case-study-item-image">
+            <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" class="case-study-image">
+          </div>
+          {{ end }}
+          
+          <div class="case-study-item-content">
+            <h2 class="case-study-item-title">
+              <a href="{{ .Permalink }}">{{ .Params.client_name | default .Title }}</a>
+            </h2>
+            
+            <div class="case-study-preview">
+              <div class="challenge-preview">
+                <h4>Challenge</h4>
+                <p>{{ .Params.challenge | truncate 100 }}</p>
+              </div>
+              
+              <div class="result-preview">
+                <h4>Result</h4>
+                <p>{{ .Params.result | truncate 100 }}</p>
+              </div>
+            </div>
+            
+            <a href="{{ .Permalink }}" class="case-study-link">Read Full Case Study</a>
+          </div>
+        </div>
+        {{ end }}
+      </div>
+      
+      {{ else }}
+      <!-- Generic List -->
+      <div class="generic-list">
+        {{ range .Pages }}
+        <div class="list-item">
+          <h2 class="list-item-title">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h2>
+          
+          {{ if .Summary }}
+          <p class="list-item-summary">{{ .Summary | truncate 200 }}</p>
+          {{ end }}
+          
+          <a href="{{ .Permalink }}" class="list-item-link">Read More</a>
+        </div>
+        {{ end }}
+      </div>
+      {{ end }}
+      
+      <!-- Pagination -->
+      {{ if .Paginator.HasPrev }}
+      <div class="pagination">
+        <div class="pagination-links">
+          {{ if .Paginator.HasPrev }}
+          <a href="{{ .Paginator.Prev.URL }}" class="pagination-link prev">← Previous</a>
+          {{ end }}
+          
+          {{ range .Paginator.Pagers }}
+          {{ if eq . $.Paginator }}
+          <span class="pagination-link current">{{ .PageNumber }}</span>
+          {{ else }}
+          <a href="{{ .URL }}" class="pagination-link">{{ .PageNumber }}</a>
+          {{ end }}
+          {{ end }}
+          
+          {{ if .Paginator.HasNext }}
+          <a href="{{ .Paginator.Next.URL }}" class="pagination-link next">Next →</a>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}
+

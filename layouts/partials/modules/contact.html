@@ -1,0 +1,86 @@
+<section class="contact-module {{ if .module.background_color }}bg-{{ .module.background_color }}{{ end }}">
+  <div class="container">
+    <div class="contact-content">
+      {{ if .module.title }}
+      <h2 class="contact-title">{{ .module.title | markdownify }}</h2>
+      {{ end }}
+      
+      {{ if .module.subtitle }}
+      <p class="contact-subtitle">{{ .module.subtitle | markdownify }}</p>
+      {{ end }}
+      
+      {{ if .module.description }}
+      <div class="contact-description">
+        {{ .module.description | markdownify }}
+      </div>
+      {{ end }}
+      
+      <div class="contact-grid">
+        {{ if .module.form }}
+        <div class="contact-form">
+          {{ if .module.form.hubspot_form_id }}
+          <!-- HubSpot Form Embed -->
+          <div id="hubspot-form-{{ .module.form.hubspot_form_id }}"></div>
+          <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+          <script>
+            hbspt.forms.create({
+              region: "{{ .module.form.hubspot_region | default "na1" }}",
+              portalId: "{{ .module.form.hubspot_portal_id }}",
+              formId: "{{ .module.form.hubspot_form_id }}"
+            });
+          </script>
+          {{ else }}
+          <!-- Fallback Contact Form -->
+          <form class="contact-form-fallback" action="{{ .module.form.action | default "/contact" }}" method="POST">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company">
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+          {{ end }}
+        </div>
+        {{ end }}
+        
+        {{ if .module.contact_info }}
+        <div class="contact-info">
+          {{ range .module.contact_info }}
+          <div class="contact-item">
+            {{ if .icon }}
+            <div class="contact-icon">{{ .icon | safeHTML }}</div>
+            {{ end }}
+            
+            <div class="contact-details">
+              {{ if .label }}
+              <h4 class="contact-label">{{ .label }}</h4>
+              {{ end }}
+              
+              {{ if .value }}
+              <p class="contact-value">{{ .value | markdownify }}</p>
+              {{ end }}
+            </div>
+          </div>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</section>
+

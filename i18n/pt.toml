@@ -1,0 +1,115 @@
+[nav_services]
+other = "Serviços"
+
+[nav_case_studies]
+other = "Casos de Estudo"
+
+[nav_insights]
+other = "Insights"
+
+[nav_about]
+other = "Sobre"
+
+[nav_contact]
+other = "Contato"
+
+[hero_cta]
+other = "Agendar Consulta"
+
+[hero_secondary_cta]
+other = "Ver Casos de Estudo"
+
+[services_title]
+other = "Nossos Serviços"
+
+[services_subtitle]
+other = "Otimização completa de operações de receita"
+
+[case_studies_title]
+other = "Histórias de Sucesso"
+
+[case_studies_subtitle]
+other = "Resultados reais de clientes reais"
+
+[blog_title]
+other = "Últimos Insights"
+
+[blog_subtitle]
+other = "Mantenha-se atualizado com nossos últimos insights"
+
+[contact_title]
+other = "Pronto para Escalar suas Operações de Receita?"
+
+[contact_subtitle]
+other = "Vamos discutir como podemos ajudar você a construir um motor de vendas que realmente funciona."
+
+[read_more]
+other = "Leia Mais"
+
+[learn_more]
+other = "Saiba Mais"
+
+[view_all]
+other = "Ver Todos"
+
+[get_started]
+other = "Começar"
+
+[schedule_call]
+other = "Agendar Chamada"
+
+[challenge]
+other = "Desafio"
+
+[result]
+other = "Resultado"
+
+[footer_description]
+other = "Transformamos caos em receita. Da geração de demanda ao fechamento de negócios, construímos motores de vendas com IA que realmente escalam."
+
+[footer_copyright]
+other = "© 2024 Cantalops. Todos os direitos reservados."
+
+
+[contact_email_label]
+other = "Email"
+
+[contact_phone_label]
+other = "Telefone"
+
+[contact_location_label]
+other = "Localização"
+
+[contact_location_value]
+other = "Remoto e Presencial"
+
+[contact_form_title]
+other = "Comece Hoje"
+
+[contact_form_subtitle]
+other = "Conte-nos sobre seus desafios de operações de receita e retornaremos em até 24 horas."
+
+[form_loading]
+other = "Carregando formulário de contato..."
+
+[form_name]
+other = "Nome"
+
+[form_email]
+other = "Email"
+
+[form_company]
+other = "Empresa"
+
+[form_phone]
+other = "Telefone"
+
+[form_message]
+other = "Mensagem"
+
+[form_message_placeholder]
+other = "Conte-nos sobre seus desafios de operações de receita..."
+
+[form_submit]
+other = "Enviar Mensagem"
+

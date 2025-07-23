@@ -1,0 +1,97 @@
+<section class="case-studies-module {{ if .module.background_color }}bg-{{ .module.background_color }}{{ else }}case-studies-section{{ end }}">
+  <div class="container">
+    {{ if .module.title }}
+    <h2 class="case-studies-title">{{ .module.title | markdownify }}</h2>
+    {{ end }}
+    
+    {{ if .module.subtitle }}
+    <p class="case-studies-subtitle">{{ .module.subtitle | markdownify }}</p>
+    {{ end }}
+    
+    <div class="case-studies-grid">
+      {{ if .module.case_studies }}
+        {{ range .module.case_studies }}
+        <div class="case-study-card">
+          {{ if .client }}
+          <h3 class="case-study-client">{{ .client }}</h3>
+          {{ end }}
+          
+          {{ if .challenge }}
+          <div class="case-study-section">
+            <h4 class="case-study-label">Challenge</h4>
+            <p class="case-study-text">{{ .challenge | markdownify }}</p>
+          </div>
+          {{ end }}
+          
+          {{ if .result }}
+          <div class="case-study-section">
+            <h4 class="case-study-label">Result</h4>
+            <p class="case-study-text">{{ .result | markdownify }}</p>
+          </div>
+          {{ end }}
+          
+          {{ if .quote }}
+          <blockquote class="case-study-quote">
+            <p>{{ .quote.text | markdownify }}</p>
+            {{ if .quote.author }}
+            <cite>{{ .quote.author }}</cite>
+            {{ end }}
+          </blockquote>
+          {{ end }}
+          
+          {{ if .link }}
+          <a href="{{ .link.url }}" class="case-study-link">{{ .link.text | default "Read Full Case Study" }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+      {{ else }}
+        <!-- Fallback to site case studies if no module case studies defined -->
+        {{ range (where .page.Site.Pages "Section" "case-studies") }}
+        <div class="case-study-card">
+          <h3 class="case-study-client">
+            <a href="{{ .Permalink }}">{{ .Title }}</a>
+          </h3>
+          
+          {{ if .Params.challenge }}
+          <div class="case-study-section">
+            <h4 class="case-study-label">Challenge</h4>
+            <p class="case-study-text">{{ .Params.challenge }}</p>
+          </div>
+          {{ end }}
+          
+          {{ if .Params.result }}
+          <div class="case-study-section">
+            <h4 class="case-study-label">Result</h4>
+            <p class="case-study-text">{{ .Params.result }}</p>
+          </div>
+          {{ end }}
+          
+          {{ if .Params.quote }}
+          <blockquote class="case-study-quote">
+            {{ if (reflect.IsMap .Params.quote) }}
+              <p>{{ .Params.quote.text }}</p>
+              {{ if .Params.quote.author }}
+              <cite>{{ .Params.quote.author }}</cite>
+              {{ end }}
+            {{ else }}
+              <p>{{ .Params.quote }}</p>
+            {{ end }}
+          </blockquote>
+          {{ end }}
+          
+          <a href="{{ .Permalink }}" class="case-study-link">Read Full Case Study</a>
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    
+    {{ if .module.button }}
+    <div class="case-studies-cta">
+      <a href="{{ .module.button.url }}" class="btn {{ if .module.button.primary }}btn-primary{{ else }}btn-secondary{{ end }}">
+        {{ .module.button.text }}
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
