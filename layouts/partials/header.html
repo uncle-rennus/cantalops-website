@@ -8,7 +8,7 @@
         </a>
       </div>
       
-      <ul class="navbar-nav">
+      <ul id="navbar-menu" class="navbar-nav">
         <li class="nav-item">
           <a href="{{ "services" | relLangURL }}" class="nav-link">{{ i18n "nav_services" }}</a>
         </li>
@@ -39,9 +39,14 @@
         
         <!-- Theme Toggle -->
         <li class="nav-item">
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-            🌙
-          </button>
+          <div class="theme-toggle-wrapper" title="Toggle theme">
+            <input type="checkbox" id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+            <label for="theme-toggle" class="theme-toggle-label">
+              <span class="theme-toggle-track">
+                <span class="theme-toggle-indicator"></span>
+              </span>
+            </label>
+          </div>
         </li>
       </ul>
       
